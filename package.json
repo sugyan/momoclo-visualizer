@@ -1,0 +1,26 @@
+{
+  "author": "sugyan",
+  "name": "momoclo-blog-comments",
+  "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "bin": {
+    "scrape": "./bin/scrape.js"
+  },
+  "dependencies": {
+    "async": ">=0.1.18",
+    "data-section": ">=0.2.1",
+    "express": ">=2.5.9",
+    "google-spreadsheets": ">=0.0.3",
+    "googleclientlogin": ">=0.2.3",
+    "request": ">=2.9.200",
+    "scraper": ">=0.0.9"
+  },
+  "devDependencies": {},
+  "optionalDependencies": {},
+  "engines": {
+    "node": "0.6.x"
+  }
+}
