@@ -71,16 +71,18 @@ function renderChart (data) {
     window.chart = new Highcharts.StockChart({
 	chart : {
 	    renderTo: 'container',
-            backgroundColor: 'gray'
+            backgroundColor: 'gray',
+            height: $(window).get(0).innerHeight - 25
 	},
-        loading: {
-        },
 	rangeSelector: {
-	    selected: 1
+	    selected: window.location.hash === '#all' ? 5 : 1
 	},
 	title: {
 	    text : 'comment count'
 	},
+        yAxis: {
+            min: 0
+        },
 	series: series.concat(flags)
     });    
 }
