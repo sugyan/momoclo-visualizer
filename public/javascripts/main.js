@@ -63,11 +63,6 @@ function renderChart (data) {
             })
         };
     });
-    Highcharts.setOptions({
-        global: {
-            useUTC: false
-        }
-    });
     window.chart = new Highcharts.StockChart({
 	chart : {
 	    renderTo: 'container',
