@@ -30,18 +30,32 @@ $(function () {
 });
 
 function renderChart (data) {
+    var flags = [];
     var series = $.map(data, function (e) {
         var name = e.feed.title.$t;
+        var color = {
+            momota  : '#FF0000',
+            ariyasu : '#00FF00',
+            tamai   : '#FFFF00',
+            sasaki  : '#FF00FF',
+            takagi  : '#800080'
+        }[name];
         return {
             name: name,
-            color: {
-                '赤': '#FF0000',
-                '緑': '#00FF00',
-                '黄': '#FFFF00',
-                '桃': '#FF00FF',
-                '紫': '#800080'
-            }[name],
+            color: color,
             data: $.map(e.feed.entry.reverse(), function (e) {
+                if (Number(e.gsx$count.$t > 1000)) {
+                    flags.push({
+                        type: 'flags',
+                        color: color,
+                        data: [{
+                            x: new Date(e.gsx$date.$t).getTime(),
+                            y: Number(e.gsx$count.$t),
+                            title: e.gsx$count.$t
+                        }],
+                        name: e.gsx$title.$t
+                    });
+                }
                 return {
                     x: new Date(e.gsx$date.$t).getTime(),
                     y: Number(e.gsx$count.$t)
@@ -49,17 +63,24 @@ function renderChart (data) {
             })
         };
     });
+    Highcharts.setOptions({
+        global: {
+            useUTC: false
+        }
+    });
     window.chart = new Highcharts.StockChart({
 	chart : {
 	    renderTo: 'container',
-            backgroundColor: 'lightgray'
+            backgroundColor: 'gray'
 	},
+        loading: {
+        },
 	rangeSelector: {
 	    selected: 1
 	},
 	title: {
 	    text : 'comment count'
 	},
-	series: series
+	series: series.concat(flags)
     });    
 }
