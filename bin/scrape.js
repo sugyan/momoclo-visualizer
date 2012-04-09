@@ -96,12 +96,9 @@ async.waterfall([
                     var list = $('#recent_entries_list li');
                     list.each(function (i, e) {
                         var li = $(e);
-                        values.push({ row: row + i, col: 1, value: li.find('.updatetime').text().trim()      });
-                        values.push({ row: row + i, col: 2, value: li.find('.cotb').text().match(/(\d+)/)[1] });
-                        values.push({ row: row + i, col: 3, value: li.find('.newentrytitle').text()          });
-                        // updateCell(member[key].sheet, member[key].col + i, 1, li.find('.updatetime').text().trim());
-                        // updateCell(member[key].sheet, member[key].col + i, 2, li.find('.cotb').text().match(/(\d+)/)[1]);
-                        // updateCell(member[key].sheet, member[key].col + i, 3, li.find('.newentrytitle').text());
+                        values.push({ row: row + i, col: 1, value: new Date(li.find('.updatetime').text().trim()).toString() });
+                        values.push({ row: row + i, col: 2, value: li.find('.cotb').text().match(/(\d+)/)[1]                 });
+                        values.push({ row: row + i, col: 3, value: li.find('.newentrytitle').text()                          });
                     });
                     updateSpreadSheet(values, item.sheet, row, list.length);
                     setTimeout(function () {

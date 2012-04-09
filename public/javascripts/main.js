@@ -10,7 +10,7 @@ $(function () {
     $.ajax({
         url: 'http://spreadsheets.google.com/feeds/worksheets/' + key + '/public/values',
         success: function (res) {
-            $.each(res.feed.entry.slice(0, 5), function (i, e) {
+            $.each(res.feed.entry, function (i, e) {
                 var worksheet = e.id.$t.split('/').pop();
                 $.ajax({
                     url: 'http://spreadsheets.google.com/feeds/list/' + key + '/' + worksheet + '/public/values',
