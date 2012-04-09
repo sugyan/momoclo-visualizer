@@ -23,8 +23,8 @@ $(function () {
                 });
             });
         },
-        error: function (xhr, error) {
-            console.err(error);
+        error: function (xhr, err) {
+            console.error(err);
         }
     });
 });
