@@ -19,7 +19,8 @@ def scrape (id, page)
   $log.info("scarpe #{name}:#{page}")
 
   doc = Nokogiri::HTML(open("http://ameblo.jp/#{name}-sd/entrylist-#{page}.html"))
-  doc.css('#recent_entries_list li').each do |li|
+  list = doc.css('#recent_entries_list li')
+  list.each do |li|
     datetime = DateTime.parse(li.css('.updatetime').text.strip + '+09:00')
     title    = li.css('.newentrytitle')[0].text()
     count    = li.css('.cotb').text.match(/(\d+)/)[1].to_i()
@@ -39,8 +40,13 @@ def scrape (id, page)
       $log.debug("update - #{url}: #{count}")
     end
   end
+  if list.length == 20 && page < 20
+    sleep 1
+    scrape(id, page + 1)
+  end
 end
 
-# TODO
-scrape(1, 1)
+$member.each do |key, value|
+  scrape(key, 1)
+end
 $conn.close()
