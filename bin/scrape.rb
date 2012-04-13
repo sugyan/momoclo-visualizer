@@ -1,12 +1,17 @@
 #!/usr/bin/env ruby
-require 'date'
 require 'logger'
 require 'nokogiri'
 require 'open-uri'
 require 'pg'
 
+uri = URI.parse(ENV['SHARED_DATABASE_URL'])
+pgconf = { host: uri.host, dbname: uri.path.slice(1..-1) }
+if uri.user && uri.password
+  pgconf[:user]     = uri.user
+  pgconf[:password] = uri.password
+end
+$conn = PG.connect(pgconf)
 $log = Logger.new(STDOUT)
-$conn = PG.connect(dbname: 'momoclo')
 $member = { 1 => 'momota', 2 => 'ariyasu', 3 => 'tamai', 4 => 'sasaki', 5 => 'takagi' }
 
 def scrape (id, page)
