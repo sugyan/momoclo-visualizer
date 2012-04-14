@@ -1,6 +1,6 @@
 Highcharts.setOptions({
     global: {
-	useUTC: false
+        useUTC: false
     }
 });
 
