@@ -9,7 +9,10 @@ get '/' do
 end
 
 get '/blog_comments/' do
-  haml :blog_comments, :locals => {:jss => ['/js/blog_comments.js']}
+  haml :blog_comments, :locals => {
+    :title => 'blog comments',
+    :jss   => ['/js/blog_comments.js']
+  }
 end
 
 get '/api/all' do

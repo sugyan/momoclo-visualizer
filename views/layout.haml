@@ -2,7 +2,7 @@
 %html
   %head
     %meta{:charset => "UTF-8"}
-    %title momoclo blog comments
+    %title #{ locals[:title] ? locals[:title] + ' | ' : '' }momoclo visualizer
     %script{:type => "text/javascript", :src => "/js/lib/jquery-1.7.2.min.js"}
     %script{:type => "text/javascript", :src => "/js/lib/highstock.js"}
     %link{:rel => "stylesheet/less", :type => "text/css", :href => "/bootstrap/less/bootstrap.less"}
