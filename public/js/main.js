@@ -1,27 +1,41 @@
+Highcharts.setOptions({
+    global: {
+	useUTC: false
+    }
+});
+
 $(function () {
     $.getJSON('/api/all',function (res) {
-        var data = $.map(res[1], function (e) {
+        var series = $.map([0, 1, 2, 3, 4], function (i) {
             return {
-                x: e.datetime * 1000,
-                y: e.count
+                color: ['#FF0000', '#00FF00', '#FFFF00', '#FF00FF', '#800080'][i],
+                name: ['momota', 'ariyasu', 'tamai', 'sasaki', 'takagi'][i],
+                data: $.map(res[i + 1], function (e) {
+                    return {
+                        x: e.datetime * 1000,
+                        y: e.count
+                    };
+                })
             };
         });
-        window.chart = new Highcharts.StockChart({
+        var chart = new Highcharts.StockChart({
 	    chart: {
 	        renderTo: 'container',
                 backgroundColor: '#404040'
 	    },
 	    title: {
-	        text: 'ブログコメント数'
+	        text: 'ブログコメント数',
+                style: {
+                    color: '#FFFFFF'
+                }
 	    },
 	    rangeSelector: {
 	        selected: 1
 	    },
-	    series: [{
-                color: '#FF0000',
-                name: 'test',
-                data: data
-            }]
+            yAxis: {
+                min: 0
+            },
+	    series: series
         });
     });
 });
