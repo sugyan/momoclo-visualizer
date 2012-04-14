@@ -20,7 +20,7 @@ $(function () {
         });
         var chart = new Highcharts.StockChart({
 	    chart: {
-	        renderTo: 'container',
+	        renderTo: 'chart',
                 backgroundColor: '#404040'
 	    },
 	    title: {
