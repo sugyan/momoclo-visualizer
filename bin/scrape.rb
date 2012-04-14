@@ -21,7 +21,7 @@ def scrape (id, page)
   doc = Nokogiri::HTML(open("http://ameblo.jp/#{name}-sd/entrylist-#{page}.html"))
   list = doc.css('#recent_entries_list li')
   list.each do |li|
-    datetime = DateTime.parse(li.css('.updatetime').text.strip + '+09:00')
+    datetime = li.css('.updatetime').text.strip + '+09:00'
     title    = li.css('.newentrytitle')[0].text()
     count    = li.css('.cotb').text.match(/(\d+)/)[1].to_i()
     url      = li.css('a')[0][:href]
@@ -34,8 +34,8 @@ def scrape (id, page)
       $log.debug("insert - #{url}: #{count}")
     else
       $conn.exec(
-        'UPDATE item SET count = $1::integer WHERE url = $2::varchar',
-        [ count, url ]
+        'UPDATE item SET count = $1::integer, datetime = $2::timestamp WHERE url = $3::varchar',
+        [ count, datetime, url ]
       )
       $log.debug("update - #{url}: #{count}")
     end
