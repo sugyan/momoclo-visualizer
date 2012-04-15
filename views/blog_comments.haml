@@ -23,11 +23,17 @@
           %label.checkbox.inline.takagi
             %input{:type => "checkbox", :checked => params["check"] && params["check"][4] == "0" ? nil : "checked"} 高城れに
       .control-group
+        %label.control-label 表示範囲(X軸)
+        .controls
+          %input.input-small.datetime{:type => "text", :value => "#{ params["from"] || Date::today << 3 }"}
+          #{"-"}
+          %input.input-small.datetime{:type => "text", :value => "#{ params["to"]   || Date::today + 1  }"}
+      .control-group
         %label.control-label 表示範囲(Y軸)
         .controls
-          %input.input-mini{:type => "text", :value => "0", :disabled => "disabled"}
+          %input.input-small{:type => "text", :value => "0", :disabled => "disabled"}
           #{"-"}
-          %input.input-mini{:type => "number", :min => "100", :step => "100", :placeholder => "auto", :value => "#{ params["max"] }"}
+          %input.input-small{:type => "number", :min => "100", :step => "100", :placeholder => "auto", :value => "#{ params["max"] }"}
       .control-group
         %label.control-label permalink
         .controls
