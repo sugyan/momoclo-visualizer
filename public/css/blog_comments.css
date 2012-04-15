@@ -1,0 +1,8 @@
+#chart {
+    height: 500px;
+}
+
+#chart .loading {
+    text-align: center;
+    padding-top: 200px;
+}

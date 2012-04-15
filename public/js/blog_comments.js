@@ -24,9 +24,9 @@ $(function () {
                 backgroundColor: '#404040'
 	    },
 	    title: {
-	        text: 'ブログコメント数',
+	        text: 'コメント数',
                 style: {
-                    color: '#FFFFFF'
+                    color: '#808080'
                 }
 	    },
 	    rangeSelector: {

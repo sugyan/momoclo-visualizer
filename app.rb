@@ -11,7 +11,8 @@ end
 get '/blog_comments/' do
   haml :blog_comments, :locals => {
     :title => 'blog comments',
-    :jss   => ['/js/blog_comments.js']
+    :jss   => ['/js/blog_comments.js'],
+    :csss  => ['/css/blog_comments.css'],
   }
 end
 
