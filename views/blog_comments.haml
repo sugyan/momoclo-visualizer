@@ -5,3 +5,19 @@
     %div
       %img{:src => "/img/ajax-loader.gif"}
     %strong Loading...
+%hr
+#customize
+  .pull-right.form-inline
+    permalink:
+    %input#permalink.url{:type => "text", :readonly => "readonly", :value => "#{ request.url }"}
+  .checkboxes
+    %label.checkbox.inline.momota
+      %input{:type => "checkbox", :checked => params['check'] && params['check'][0] == "0" ? nil : "checked"} 百田夏菜子
+    %label.checkbox.inline.ariyasu
+      %input{:type => "checkbox", :checked => params['check'] && params['check'][1] == "0" ? nil : "checked"} 有安杏果
+    %label.checkbox.inline.tamai
+      %input{:type => "checkbox", :checked => params['check'] && params['check'][2] == "0" ? nil : "checked"} 玉井詩織
+    %label.checkbox.inline.sasaki
+      %input{:type => "checkbox", :checked => params['check'] && params['check'][3] == "0" ? nil : "checked"} 佐々木彩夏
+    %label.checkbox.inline.takagi
+      %input{:type => "checkbox", :checked => params['check'] && params['check'][4] == "0" ? nil : "checked"} 高城れに

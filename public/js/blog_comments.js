@@ -8,7 +8,7 @@ $(function () {
     $.getJSON('/api/all',function (res) {
         var series = $.map([0, 1, 2, 3, 4], function (i) {
             return {
-                color: ['#FF0000', '#00FF00', '#FFFF00', '#FF00FF', '#800080'][i],
+                color: ['red', 'green', 'yellow', 'pink', 'purple'][i],
                 name: ['momota', 'ariyasu', 'tamai', 'sasaki', 'takagi'][i],
                 data: $.map(res[i + 1], function (e) {
                     return {
@@ -37,5 +37,24 @@ $(function () {
             },
 	    series: series
         });
+        var refresh = function () {
+            var param = {};
+            var check = '';
+            $('#customize input[type="checkbox"]').each(function (i, e) {
+                var checked = $(e).attr('checked');
+                chart.series[i][checked ? 'show' : 'hide']();
+                check += checked ? '1' : '0';
+            });
+            if (check !== '11111') {
+                param.check = check;
+            }
+            $('#permalink').val(location.origin + location.pathname + '?' + $.param(param));
+            console.log($('#permalink').val());
+        };
+        $('#customize input').change(refresh);
+        $('#permalink').click(function () {
+            this.select();
+        });
+        refresh();
     });
 });

@@ -6,3 +6,26 @@
     text-align: center;
     padding-top: 200px;
 }
+
+#customize {
+    padding: 10px;
+    background-color: darkgray;
+}
+#customize #permalink {
+    cursor: auto;
+}
+#customize .momota {
+    color: red;
+}
+#customize .ariyasu {
+    color: green;
+}
+#customize .tamai {
+    color: yellow;
+}
+#customize .sasaki {
+    color: pink;
+}
+#customize .takagi {
+    color: purple;
+}
