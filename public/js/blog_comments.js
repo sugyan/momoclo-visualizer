@@ -39,19 +39,25 @@ $(function () {
         });
         var refresh = function () {
             var param = {};
-            var check = '';
-            $('#customize input[type="checkbox"]').each(function (i, e) {
-                var checked = $(e).attr('checked');
-                chart.series[i][checked ? 'show' : 'hide']();
-                check += checked ? '1' : '0';
-            });
+            var check = $('#customize input[type="checkbox"]').map(function (i, e) {
+                var checked = $(e).attr('checked') ? true : false;
+                if (checked ^ chart.series[i].visible) {
+                    chart.series[i][checked ? 'show' : 'hide']();
+                }
+                return checked ? '1' : '0';
+            }).toArray().join('');
+            var max = $('#customize input[type="number"]').val();
+            chart.yAxis[0].setExtremes(0, max || null);
             if (check !== '11111') {
                 param.check = check;
             }
+            if (max !== "") {
+                param.max = max;
+            }
             $('#permalink').val(location.origin + location.pathname + '?' + $.param(param));
-            console.log($('#permalink').val());
         };
-        $('#customize input').change(refresh);
+        $('#customize input[type="checkbox"]').change(refresh);
+        $('#customize input[type="number"]').bind('input', refresh);
         $('#permalink').click(function () {
             this.select();
         });

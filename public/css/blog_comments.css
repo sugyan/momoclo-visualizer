@@ -11,9 +11,6 @@
     padding: 10px;
     background-color: darkgray;
 }
-#customize #permalink {
-    cursor: auto;
-}
 #customize .momota {
     color: red;
 }
@@ -28,4 +25,7 @@
 }
 #customize .takagi {
     color: purple;
+}
+#customize #permalink {
+    cursor: auto;
 }
