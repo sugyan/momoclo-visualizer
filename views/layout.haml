@@ -32,7 +32,7 @@
         .social-buttons
           %a.hatena-bookmark-button{:href => "http://b.hatena.ne.jp/entry/#{ request.host + request.path }", :"data-hatena-bookmark-layout" => "standard", :title => "このエントリーをはてなブックマークに追加"}
             %img{:src => "http://b.st-hatena.com/images/entry-button/button-only.gif", :alt => "このエントリーをはてなブックマークに追加", :width => "20", :height => "20", :style => "border: none;"}
-          %a.twitter-share-button{:href => "https://twitter.com/share", :"data-via" => "sugyan", :"data-lang" => "ja", :"data-hashtags" => "momoclo"} ツイート
+          %a.twitter-share-button{:href => "https://twitter.com/share", :"data-via" => "sugyan", :"data-lang" => "ja", :"data-hashtags" => "momoclo", :"data-url" => "#{ request.scheme + '://' + request.host + request.path }"} ツイート
           .fb-like{:"data-send" => "false", :"data-layout" => "button_count", :"data-width" => "450", :"data-show-faces" => "false"}
           %script !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
           %script{:type => "text/javascript", :src => "http://b.st-hatena.com/js/bookmark_button.js", :charset => "utf-8", :async => "async"}
