@@ -12,6 +12,9 @@ Date.prototype.ymd = function () {
 Highcharts.setOptions({
     global: {
         useUTC: false
+    },
+    lang: {
+        shortMonths: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']
     }
 });
 
@@ -40,10 +43,21 @@ $(function () {
 	    renderTo: 'chart',
             backgroundColor: '#404040'
 	},
+        navigator: {
+            xAxis: {
+                dateTimeLabelFormats: {
+                    week: '%b月%e日'
+                }
+            }
+        },
 	rangeSelector: {
 	    enabled: false
 	},
         xAxis: {
+            dateTimeLabelFormats: {
+                day: '%Y年<br>%b月%e日',
+                week: '%Y年<br>%b月%e日'
+            },
             events: {
                 setExtremes: function (event) {
                     if (initialized) {
@@ -57,6 +71,11 @@ $(function () {
         yAxis: {
             min: 0,
             max: Number($('#range-max').val()) || null
+        },
+        tooltip: {
+            pointFormat: '<span style="color:{series.color}">{point.title}</span>: <b>{point.y}</b><br/>',
+            backgroundColor: 'rgba(144, 144, 144, .95)',
+            xDateFormat: '%Y年%b月%e日 %H:%M:%S'
         },
 	series: [{
             color: 'red',
@@ -83,7 +102,8 @@ $(function () {
                     max_datetime = Math.max(max_datetime, e.datetime);
                     return {
                         x: e.datetime * 1000,
-                        y: e.count
+                        y: e.count,
+                        title: e.title
                     };
                 })
             );
