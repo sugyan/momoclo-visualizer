@@ -30,7 +30,7 @@
         =yield
       %footer.footer
         .social-buttons
-          %a.hatena-bookmark-button{:href => "http://b.hatena.ne.jp/entry/#{request.url}", :"data-hatena-bookmark-layout" => "standard", :title => "このエントリーをはてなブックマークに追加"}
+          %a.hatena-bookmark-button{:href => "http://b.hatena.ne.jp/entry/#{ request.host + request.path }", :"data-hatena-bookmark-layout" => "standard", :title => "このエントリーをはてなブックマークに追加"}
             %img{:src => "http://b.st-hatena.com/images/entry-button/button-only.gif", :alt => "このエントリーをはてなブックマークに追加", :width => "20", :height => "20", :style => "border: none;"}
           %a.twitter-share-button{:href => "https://twitter.com/share", :"data-via" => "sugyan", :"data-lang" => "ja", :"data-hashtags" => "momoclo"} ツイート
           .fb-like{:"data-send" => "false", :"data-layout" => "button_count", :"data-width" => "450", :"data-show-faces" => "false"}
