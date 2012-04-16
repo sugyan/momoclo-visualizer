@@ -19,6 +19,13 @@ Highcharts.setOptions({
 });
 
 $(function () {
+    var parseDate = function (input) {
+        var i = 0, fmt = {};
+        var format = 'yyyy-mm-dd';
+        var parts = input.match(/(\d+)/g);
+        format.replace(/(yyyy|dd|mm)/g, function (part) { fmt[part] = i++; });
+        return new Date(parts[fmt['yyyy']], parts[fmt['mm']]-1, parts[fmt['dd']]);
+    };
     var initialized = false;
     var updatePermalink = function () {
         var params = {
@@ -110,12 +117,12 @@ $(function () {
         }
 
         // xAxis
-        var from = $('.datetime').eq(0).val();
-        var to   = $('.datetime').eq(1).val();
-        if (new Date(to).getTime() > max_datetime * 1000) {
+        var from = parseDate($('.datetime').eq(0).val());
+        var to   = parseDate($('.datetime').eq(1).val());
+        if (to.getTime() > max_datetime * 1000) {
             to = new Date(max_datetime * 1000);
         }
-        chart.xAxis[0].setExtremes(new Date(from), new Date(to));
+        chart.xAxis[0].setExtremes(from, to);
         // yAxis
         chart.yAxis[0].setExtremes(0, Number($('#range-max').val()) || null);
 
@@ -134,8 +141,8 @@ $(function () {
     });
     // datepicker
     $('#customize .datetime').datepicker({ dateFormat: 'yy-mm-dd' }).change(function () {
-        var min = new Date($('.datetime').eq(0).val());
-        var max = new Date($('.datetime').eq(1).val());
+        var min = parseDate($('.datetime').eq(0).val());
+        var max = parseDate($('.datetime').eq(1).val());
         if (min < max) {
             chart.xAxis[0].setExtremes(min, max);
             updatePermalink();
