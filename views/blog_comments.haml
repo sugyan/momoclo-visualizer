@@ -33,7 +33,7 @@
         .controls
           %input.input-small{:type => "text", :value => "0", :disabled => "disabled"}
           #{"-"}
-          %input.input-small{:type => "number", :min => "100", :step => "100", :placeholder => "auto", :value => "#{ params["max"] }"}
+          %input#range-max.input-small{:type => "number", :min => "100", :step => "100", :placeholder => "auto", :value => "#{ params["max"] }"}
       .control-group
         %label.control-label permalink
         .controls

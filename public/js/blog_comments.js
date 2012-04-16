@@ -1,3 +1,14 @@
+Date.prototype.ymd = function () {
+    var year  = this.getFullYear();
+    var month = this.getMonth() + 1;
+    var date  = this.getDate();
+    return [
+        year,
+        (month < 10 ? '0' : '') + month,
+        (date  < 10 ? '0' : '') + date
+    ].join('-');
+};
+
 Highcharts.setOptions({
     global: {
         useUTC: false
@@ -5,69 +16,118 @@ Highcharts.setOptions({
 });
 
 $(function () {
-    $.getJSON('/api/all',function (res) {
-        var series = $.map([0, 1, 2, 3, 4], function (i) {
-            return {
-                color: ['red', 'green', 'yellow', 'pink', 'purple'][i],
-                name: ['momota', 'ariyasu', 'tamai', 'sasaki', 'takagi'][i],
-                data: $.map(res[i + 1], function (e) {
+    var initialized = false;
+    var updatePermalink = function () {
+        var params = {
+            from : $('.datetime').eq(0).val(),
+            to   : $('.datetime').eq(1).val()
+        };
+        var max   = $('#range-max').val();
+        var check = $('.checkbox input').map(function (i, e) {
+            return $(e).attr('checked') ? '1' : '0';
+        }).toArray().join('');
+
+        if (max) {
+            params.max = Number(max);
+        }
+        if (check !== '11111') {
+            params.check = check;
+        }
+        $('#permalink').val(location.origin + location.pathname + '?' + $.param(params));
+    };
+    var chart = new Highcharts.StockChart({
+	chart: {
+	    renderTo: 'chart',
+            backgroundColor: '#404040'
+	},
+	rangeSelector: {
+	    enabled: false
+	},
+        xAxis: {
+            events: {
+                setExtremes: function (event) {
+                    if (initialized) {
+                        $('.datetime').eq(0).val(new Date(event.min).ymd());
+                        $('.datetime').eq(1).val(new Date(event.max).ymd());
+                        updatePermalink();
+                    }
+                }
+            }
+        },
+        yAxis: {
+            min: 0,
+            max: Number($('#range-max').val()) || null
+        },
+	series: [{
+            color: 'red',
+            name: 'momota'
+        }, {
+            color: 'green',
+            name: 'ariyasu'
+        }, {
+            color: 'yellow',
+            name: 'tamai'
+        }, {
+            color: 'pink',
+            name: 'sasaki'
+        }, {
+            color: 'purple',
+            name: 'takagi'
+        }]
+    });
+    $.getJSON('/api/all', function (res) {
+        var i, max_datetime = 0;
+        for (i = 0; i < 5; i++) {
+            chart.series[i].setData(
+                $.map(res[i + 1], function (e) {
+                    max_datetime = Math.max(max_datetime, e.datetime);
                     return {
                         x: e.datetime * 1000,
                         y: e.count
                     };
                 })
-            };
-        });
-        var chart = new Highcharts.StockChart({
-	    chart: {
-	        renderTo: 'chart',
-                backgroundColor: '#404040'
-	    },
-	    title: {
-	        text: 'コメント数',
-                style: {
-                    color: '#808080'
-                }
-	    },
-	    rangeSelector: {
-	        enabled: false
-	    },
-            yAxis: {
-                min: 0
-            },
-	    series: series
-        });
-        var refresh = function () {
-            var params = {};
-            var check = $('#customize input[type="checkbox"]').map(function (i, e) {
-                var checked = $(e).attr('checked') ? true : false;
-                if (checked ^ chart.series[i].visible) {
-                    chart.series[i][checked ? 'show' : 'hide']();
-                }
-                return checked ? '1' : '0';
-            }).toArray().join('');
-            var max = $('#customize input[type="number"]').val();
-            chart.yAxis[0].setExtremes(0, max || null);
-            var datetimes = $('.datetime').map(function (i, e) {
-                return $(e).val();
-            });
-            chart.xAxis[0].setExtremes(new Date(datetimes[0]), new Date(datetimes[1]));
-            if (check !== '11111') {
-                params.check = check;
+            );
+            if (! $('.checkbox input').eq(i).attr('checked')) {
+                chart.series[i].hide();
             }
-            if (max !== "") {
-                params.max = max;
-            }
-            params.from = datetimes[0];
-            params.to   = datetimes[1];
-            $('#permalink').val(location.origin + location.pathname + '?' + $.param(params));
-        };
-        $('#customize input[type="checkbox"]').change(refresh);
-        $('#customize input[type="number"]').bind('input', refresh);
-        $('#customize .datetime').datepicker({ dateFormat: 'yy-mm-dd' }).change(refresh);
-        $('#permalink').click(function () {
-            this.select();
-        });
-        refresh();
+        }
+
+        // xAxis
+        var from = $('.datetime').eq(0).val();
+        var to   = $('.datetime').eq(1).val();
+        if (new Date(to).getTime() > max_datetime * 1000) {
+            to = new Date(max_datetime * 1000);
+        }
+        chart.xAxis[0].setExtremes(new Date(from), new Date(to));
+
+        updatePermalink();
+        initialized = true;
     });
+
+    // checkbox
+    $('.checkbox input').change(function () {
+        var index   = $(this).index('.checkbox input');
+        var checked = $(this).attr('checked') ? true : false;
+        if (checked ^ chart.series[index].visible) {
+            chart.series[index][checked ? 'show' : 'hide']();
+        }
+        updatePermalink();
+    });
+    // datepicker
+    $('#customize .datetime').datepicker({ dateFormat: 'yy-mm-dd' }).change(function () {
+        var min = new Date($('.datetime').eq(0).val());
+        var max = new Date($('.datetime').eq(1).val());
+        if (min < max) {
+            chart.xAxis[0].setExtremes(min, max);
+            updatePermalink();
+        }
+    });
+    // range max
+    $('#range-max').bind('input', function () {
+        chart.yAxis[0].setExtremes(0, Number($(this).val()) || null);
+        updatePermalink();
+    });
+
+    // select
+    $('#permalink').click(function () { this.select(); });
 });
