@@ -50,6 +50,15 @@ $(function () {
                 }
             }
         },
+        plotOptions: {
+            series: {
+                events: {
+                    click: function (event) {
+                        window.open(event.point.url, '_blank');
+                    }
+                }
+            }
+        },
 	rangeSelector: {
 	    enabled: false
 	},
@@ -68,31 +77,18 @@ $(function () {
                 }
             }
         },
-        yAxis: {
-            min: 0,
-            max: Number($('#range-max').val()) || null
-        },
         tooltip: {
             pointFormat: '<span style="color:{series.color}">{point.title}</span>: <b>{point.y}</b><br/>',
             backgroundColor: 'rgba(144, 144, 144, .95)',
             xDateFormat: '%Y年%b月%e日 %H:%M:%S'
         },
-	series: [{
-            color: 'red',
-            name: 'momota'
-        }, {
-            color: 'green',
-            name: 'ariyasu'
-        }, {
-            color: 'yellow',
-            name: 'tamai'
-        }, {
-            color: 'pink',
-            name: 'sasaki'
-        }, {
-            color: 'purple',
-            name: 'takagi'
-        }]
+	series: [
+            { color: 'red'    },
+            { color: 'green'  },
+            { color: 'yellow' },
+            { color: 'pink'   },
+            { color: 'purple' }
+        ]
     });
     $.getJSON('/api/all', function (res) {
         var i, max_datetime = 0;
@@ -103,6 +99,7 @@ $(function () {
                     return {
                         x: e.datetime * 1000,
                         y: e.count,
+                        url: e.url,
                         title: e.title
                     };
                 })
@@ -119,6 +116,8 @@ $(function () {
             to = new Date(max_datetime * 1000);
         }
         chart.xAxis[0].setExtremes(new Date(from), new Date(to));
+        // yAxis
+        chart.yAxis[0].setExtremes(0, Number($('#range-max').val()) || null);
 
         updatePermalink();
         initialized = true;
