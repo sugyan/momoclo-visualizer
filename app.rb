@@ -2,7 +2,8 @@ require 'sinatra'
 require 'sinatra/json'
 require 'pg'
 
-set :haml, :format => :html5
+set :haml, :format      => :html5
+set :haml, :escape_html => true
 
 get '/' do
   haml :index
