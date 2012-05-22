@@ -12,3 +12,19 @@
     background-color: rgb(255, 255, 255);
     text-align: center;
 }
+
+.space.momota {
+    background-color: red;
+}
+.space.ariyasu {
+    background-color: green;
+}
+.space.tamai {
+    background-color: yellow;
+}
+.space.sasaki {
+    background-color: pink;
+}
+.space.takagi {
+    background-color: purple;
+}

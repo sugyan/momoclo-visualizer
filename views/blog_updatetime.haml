@@ -1,11 +1,11 @@
 %h1 blog update time
 %p 各メンバーのブログの更新時刻
-- ['momota', 'ariyasu', 'tamai', 'sasaki', 'takagi'].each do |i|
+- [['momota', '百田夏菜子'], ['ariyasu', '有安杏果'], ['tamai', '玉井詩織'], ['sasaki', '佐々木彩夏'], ['takagi', '高城れに']].each do |i|
   %hr
-  %h3= i
+  %h3= i[1]
   %table.table.table-bordered
     %tr
-      %td
+      %td.space{:class => i[0]}
       - 0.upto(23).each do |j|
         %th= j
     - ['日', '月', '火', '水', '木', '金', '土'].each do |row|
