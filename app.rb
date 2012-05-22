@@ -16,6 +16,14 @@ get '/blog_comments/' do
   }
 end
 
+get '/blog_updatetime/' do
+  haml :blog_updatetime, :locals => {
+    :title => 'blog update time',
+    :jss   => ['/js/blog_updatetime.js'],
+    :csss  => ['/css/blog_updatetime.css'],
+  }
+end
+
 get '/api/all' do
   res = {}
   uri = URI.parse(ENV['SHARED_DATABASE_URL'])

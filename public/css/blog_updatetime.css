@@ -1,0 +1,14 @@
+.table {
+    table-layout: fixed;
+}
+.table th {
+    text-align: center;
+    background-color: lightgray;
+}
+.table .cell {
+    width: 37px;
+}
+.table td {
+    background-color: rgb(255, 255, 255);
+    text-align: center;
+}
