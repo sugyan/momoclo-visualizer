@@ -29,7 +29,7 @@
           %a.brand{:href => "/"} momoclo visualizer
     .container
       #content
-        =yield
+        !=yield
       %footer.footer
         .social-buttons
           %a.hatena-bookmark-button{:href => "http://b.hatena.ne.jp/entry/#{ request.host + request.path }", :"data-hatena-bookmark-layout" => "standard", :title => "このエントリーをはてなブックマークに追加"}
