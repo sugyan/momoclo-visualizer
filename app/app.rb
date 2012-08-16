@@ -1,4 +1,4 @@
-class Hoge < Padrino::Application
+class Visualizer < Padrino::Application
   register Padrino::Rendering
   register Padrino::Mailer
   register Padrino::Helpers

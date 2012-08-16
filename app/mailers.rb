@@ -33,6 +33,6 @@
 # and then all delivered mail will use these settings unless otherwise specified.
 #
 
-Hoge.mailer :notifier do
+Visualizer.mailer :notifier do
   # Message definitions here...
 end

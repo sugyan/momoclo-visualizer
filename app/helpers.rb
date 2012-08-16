@@ -1,6 +1,6 @@
 # Helper methods defined here can be accessed in any controller or view in the application
 
-Hoge.helpers do
+Visualizer.helpers do
   # def simple_helper_method
   #  ...
   # end
