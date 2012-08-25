@@ -13,6 +13,7 @@ gem 'slim',     '>=1.2.2'
 gem 'pg',       '>=0.14.0'
 gem 'sequel',   '>=3.38.0'
 gem 'nokogiri', '>=1.5.5'
+gem 'json',     '>=1.7.5'
 
 # Test requirements
 gem 'rspec', :group => "test"
