@@ -5,6 +5,9 @@ html
     title momoclo visualizer
     link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.min.css"
     link rel="stylesheet" type="text/css" href="/stylesheets/style.css"
+    script type="text/javascript" src="/javascripts/lib/jquery.js"
+    - (locals[:jss] || []).each do |js|
+      script type="text/javascript" src==js
   body
     header
       .navbar.navbar-fixed-top
