@@ -6,9 +6,16 @@ html
     link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.min.css"
     link rel="stylesheet" type="text/css" href="/stylesheets/style.css"
   body
-    .navbar.navbar-static-top
-      .navbar-inner
-        .container
-          a.brand href="/" momoclo visualizer
+    header
+      .navbar.navbar-fixed-top
+        .navbar-inner
+          .container
+            a.brand href="/" momoclo visualizer
+    a href="https://github.com/sugyan/momoclo-visualizer"
+      img style="position: absolute; top: 40px; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"
     .container
       == yield
+      footer.footer
+        .pull-right
+          | created by 
+          a href="http://twitter.com/#!/sugyan" @sugyan
