@@ -1,11 +1,11 @@
 Sequel.migration do
-  up do
+  change do
     create_table :entries do
-      primary_key :id
+      String :url, :primary_key => true
+      String :member
+      String :title
+      DateTime :created_at
+      Integer :count
     end
-  end
-
-  down do
-    drop_table :entries
   end
 end

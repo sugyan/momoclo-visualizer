@@ -9,9 +9,10 @@ gem 'rake', '>=0.9.2.2'
 gem 'sinatra-flash', :require => 'sinatra/flash'
 
 # Component requirements
-gem 'slim',   '>=1.2.2'
-gem 'pg',     '>=0.14.0'
-gem 'sequel', '>=3.38.0'
+gem 'slim',     '>=1.2.2'
+gem 'pg',       '>=0.14.0'
+gem 'sequel',   '>=3.38.0'
+gem 'nokogiri', '>=1.5.5'
 
 # Test requirements
 gem 'rspec', :group => "test"
