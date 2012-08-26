@@ -2,10 +2,39 @@ $(function () {
     var member = { momota: 0, ariyasu: 1, tamai: 2, sasaki: 3, takagi: 4 };
     var chart = new Highcharts.StockChart({
         chart: {
-            renderTo: 'chart'
+            renderTo: 'chart',
+            backgroundColor: '#404040',
+            height: 500
         },
-        colors: ['#FF0000', '#00FF00', '#FFFF00', '#FF00FF', '#800080'],
-        series: [{}, {}, {}, {}, {}]
+        xAxis: {
+            dateTimeLabelFormats: {
+                day: '%Y年<br>%m月%d日'
+            }
+        },
+        yAxis: {
+            min: 0
+        },
+        navigator: {
+            xAxis: {
+                dateTimeLabelFormats: {
+                    week: '%m月%d日'
+                }
+            }
+        },
+        colors: [
+            'red',
+            'green',
+            'yellow',
+            'pink',
+            'purple'
+        ],
+        series: [
+            { name: 'momota'  },
+            { name: 'ariyasu' },
+            { name: 'tamai'   },
+            { name: 'sasaki'  },
+            { name: 'takagi'  }
+        ]
     });
     $.getJSON('/api/blog_comments', function (res) {
         $.each(res, function (key, value) {
