@@ -2,7 +2,7 @@ doctype html
 html
   head
     meta charset="UTF-8"
-    title momoclo visualizer
+    title #{ locals[:title] ? locals[:title] + ' | ' : '' }momoclo visualizer
     link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.min.css"
     link rel="stylesheet" type="text/css" href="/stylesheets/style.css"
     script type="text/javascript" src="/javascripts/lib/jquery.js"

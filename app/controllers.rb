@@ -4,6 +4,6 @@ Visualizer.controllers  do
   end
 
   get :blog_comments do
-    render 'blog_comments'
+    render 'blog_comments', :locals => { :title => 'blog comments' }
   end
 end
