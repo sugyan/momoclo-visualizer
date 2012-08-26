@@ -1,4 +1,39 @@
 - locals[:jss] = ['/javascripts/lib/highstock.js', '/javascripts/application.js']
 h1 blog comments
 p 各メンバーのブログへのコメント数の推移
-#chart
+div#chart
+form.well.form-horizontal
+  div.control-group
+    label.control-label 表示/非表示
+    div.controls
+      label.checkbox.inline
+        input type="checkbox" checked=true
+        span.tt data-color="red" data-color-name="赤" 百田夏菜子
+      label.checkbox.inline
+        input type="checkbox" checked=true
+        span.tt data-color="green" data-color-name="緑" 有安杏果
+      label.checkbox.inline
+        input type="checkbox" checked=true
+        span.tt data-color="yellow" data-color-name="黄" 玉井詩織
+      label.checkbox.inline
+        input type="checkbox" checked=true
+        span.tt data-color="pink" data-color-name="桃" 佐々木彩夏
+      label.checkbox.inline
+        input type="checkbox" checked=true
+        span.tt data-color="purple" data-color-name="紫" 高城れに
+  div.control-group
+    label.control-label 表示範囲 (X軸)
+    div.controls
+      input.input-small type="text"
+      |  - 
+      input.input-small type="text"
+  div.control-group
+    label.control-label 表示範囲 (Y軸)
+    div.controls
+      input.input-small type="text" value="0" disabled=true
+      |  - 
+      input.input-small type="text"
+  div.control-group
+    label.control-label Permalink
+    div.controls
+      input.input-xxlarge type="text"

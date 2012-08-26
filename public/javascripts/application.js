@@ -46,4 +46,20 @@ $(function () {
             }));
         });
     });
+
+    // bootstrap
+    $('form').tooltip({
+        selector: '.tt',
+        title: function () {
+            var color = $(this).data('color');
+            var name  = $(this).data('color-name');
+            return $('<div>').append(
+                $('<div>').css({
+                    'color': color,
+                    'font-weight': 'bold',
+                    'font-size': 'large'
+                }).text(name)
+            ).html();
+        }
+    });
 });

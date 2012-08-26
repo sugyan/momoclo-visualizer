@@ -6,19 +6,20 @@ html
     link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.min.css"
     link rel="stylesheet" type="text/css" href="/stylesheets/style.css"
     script type="text/javascript" src="/javascripts/lib/jquery.js"
+    script type="text/javascript" src="/javascripts/lib/bootstrap.js"
     - (locals[:jss] || []).each do |js|
       script type="text/javascript" src==js
   body
     header
-      .navbar.navbar-fixed-top
-        .navbar-inner
-          .container
+      div.navbar.navbar-fixed-top
+        div.navbar-inner
+          div.container
             a.brand href="/" momoclo visualizer
     a href="https://github.com/sugyan/momoclo-visualizer"
       img style="position: absolute; top: 40px; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"
-    .container
+    div.container
       == yield
       footer.footer
-        .pull-right
+        div.pull-right
           | created by 
           a href="http://twitter.com/#!/sugyan" @sugyan
