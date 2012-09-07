@@ -5,6 +5,7 @@ html
     title #{ locals[:title] ? locals[:title] + ' | ' : '' }momoclo visualizer
     link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.min.css"
     link rel="stylesheet" type="text/css" href="/stylesheets/style.css"
+    script type="text/javascript" src="/javascripts/lib/moment.js"
     script type="text/javascript" src="/javascripts/lib/jquery.js"
     script type="text/javascript" src="/javascripts/lib/bootstrap.js"
     - (locals[:jss] || []).each do |js|

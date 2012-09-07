@@ -24,9 +24,9 @@ form.well.form-horizontal
   div.control-group
     label.control-label 表示範囲 (X軸)
     div.controls
-      input.input-small type="text"
+      input.input-small#x-min type="text" value="#{ params[:from] || Date.today << 3 }"
       |  - 
-      input.input-small type="text"
+      input.input-small#x-max type="text" value="#{ params[:to]   || Date.today + 1  }"
   div.control-group
     label.control-label 表示範囲 (Y軸)
     div.controls

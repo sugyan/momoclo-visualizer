@@ -1,4 +1,5 @@
 $(function () {
+    var initialized = false;
     var member = { momota: 0, ariyasu: 1, tamai: 2, sasaki: 3, takagi: 4 };
     var chart = new Highcharts.StockChart({
         chart: {
@@ -6,9 +7,20 @@ $(function () {
             backgroundColor: '#404040',
             height: 500
         },
+	rangeSelector: {
+	    enabled: false
+	},
         xAxis: {
             dateTimeLabelFormats: {
                 day: '%Y年<br>%m月%d日'
+            },
+            events: {
+                setExtremes: function (event) {
+                    if (initialized) {
+                        $('#x-min').val(moment(event.min).format('YYYY-MM-DD'));
+                        $('#x-max').val(moment(event.max).format('YYYY-MM-DD'));
+                    }
+                }
             }
         },
         yAxis: {
@@ -37,14 +49,26 @@ $(function () {
         ]
     });
     $.getJSON('/api/blog_comments', function (res) {
+        var max_datetime = 0;
         $.each(res, function (key, value) {
             chart.series[member[key]].setData($.map(value, function (e) {
+                if (e.created_at > max_datetime) {
+                    max_datetime = e.created_at;
+                }
                 return {
-                    x: new Date(e.created_at * 1000),
+                    x: e.created_at * 1000,
                     y: e.count
                 };
             }));
         });
+        var from = moment($('#x-min').val());
+        var to   = moment($('#x-max').val());
+        if (to.unix() > max_datetime) {
+            to = new Date(max_datetime * 1000);
+        }
+        chart.xAxis[0].setExtremes(from.valueOf(), to.valueOf());
+
+        initialized = true;
     });
 
     // bootstrap
