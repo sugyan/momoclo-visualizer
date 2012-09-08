@@ -1,4 +1,5 @@
-- locals[:jss] = ['/javascripts/lib/highstock.js', '/javascripts/application.js']
+- locals[:csss] = ['/bootstrap/css/datepicker.css']
+- locals[:jss] = ['/javascripts/lib/highstock.js', '/bootstrap/js/bootstrap-datepicker.js', '/javascripts/application.js']
 h1 blog comments
 p 各メンバーのブログへのコメント数の推移
 div#chart
@@ -24,9 +25,9 @@ form.well.form-horizontal
   div.control-group
     label.control-label 表示範囲 (X軸)
     div.controls
-      input.input-small#x-min type="text" value="#{ params[:from] || Date.today << 3 }"
+      input.datepicker.input-small#x-min type="text" value="#{ params[:from] || Date.today << 3 }"
       |  - 
-      input.input-small#x-max type="text" value="#{ params[:to]   || Date.today + 1  }"
+      input.datepicker.input-small#x-max type="text" value="#{ params[:to]   || Date.today + 1  }"
   div.control-group
     label.control-label 表示範囲 (Y軸)
     div.controls

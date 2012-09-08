@@ -17,8 +17,8 @@ $(function () {
             events: {
                 setExtremes: function (event) {
                     if (initialized) {
-                        $('#x-min').val(moment(event.min).format('YYYY-MM-DD'));
-                        $('#x-max').val(moment(event.max).format('YYYY-MM-DD'));
+                        $('#x-min').val(moment(event.min).format('YYYY-MM-DD')).datepicker('update');
+                        $('#x-max').val(moment(event.max).format('YYYY-MM-DD')).datepicker('update');
                     }
                 }
             }
@@ -48,26 +48,25 @@ $(function () {
             { name: 'takagi'  }
         ]
     });
+    // update functions
+    var updateDateRange = function () {
+        var min = moment($('#x-min').val());
+        var max = moment($('#x-max').val());
+        if (min.valueOf() < max.valueOf()) {
+            chart.xAxis[0].setExtremes(min.valueOf(), max.valueOf());
+        }
+    };
+    // get data from JSON API
     $.getJSON('/api/blog_comments', function (res) {
-        var max_datetime = 0;
         $.each(res, function (key, value) {
             chart.series[member[key]].setData($.map(value, function (e) {
-                if (e.created_at > max_datetime) {
-                    max_datetime = e.created_at;
-                }
                 return {
                     x: e.created_at * 1000,
                     y: e.count
                 };
             }));
         });
-        var from = moment($('#x-min').val());
-        var to   = moment($('#x-max').val());
-        if (to.unix() > max_datetime) {
-            to = new Date(max_datetime * 1000);
-        }
-        chart.xAxis[0].setExtremes(from.valueOf(), to.valueOf());
-
+        updateDateRange();
         initialized = true;
     });
 
@@ -86,4 +85,13 @@ $(function () {
             ).html();
         }
     });
+    // datepicker
+    $('.datepicker')
+        .datepicker({ format: 'yyyy-mm-dd' })
+        .bind('changeDate change', function (event) {
+            if (event.type === 'changeDate') {
+                $(this).datepicker('hide').blur();
+            }
+            updateDateRange();
+        });
 });
