@@ -1,7 +1,7 @@
 source :rubygems
 
 # Server requirements
-gem 'thin', '>=1.4.1'
+gem 'thin', '>=1.5.0'
 # gem 'trinidad', :platform => 'jruby'
 
 # Project requirements
