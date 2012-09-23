@@ -56,6 +56,9 @@ $(function () {
             chart.xAxis[0].setExtremes(min.valueOf(), max.valueOf());
         }
     };
+    var updateValueRange = function () {
+        chart.yAxis[0].setExtremes(0, Number($('#y-max').val()) || null);
+    };
     // get data from JSON API
     $.getJSON('/api/blog_comments', function (res) {
         $.each(res, function (key, value) {
@@ -67,6 +70,7 @@ $(function () {
             }));
         });
         updateDateRange();
+        updateValueRange();
         initialized = true;
     });
 
@@ -85,7 +89,7 @@ $(function () {
             ).html();
         }
     });
-    // datepicker
+    // x-axis (datepicker)
     $('.datepicker')
         .datepicker({ format: 'yyyy-mm-dd' })
         .bind('changeDate change', function (event) {
@@ -94,4 +98,8 @@ $(function () {
             }
             updateDateRange();
         });
+    // y-axis
+    $('#y-max').bind('input', function () {
+        updateValueRange();
+    });
 });
