@@ -8,19 +8,19 @@ form.well.form-horizontal
     label.control-label 表示/非表示
     div.controls
       label.checkbox.inline
-        input type="checkbox" checked=true
+        input type="checkbox" checked="#{ params[:check] && params[:check][0] == '0' ? nil : 'checked' }"
         span.tt data-color="red" data-color-name="赤" 百田夏菜子
       label.checkbox.inline
-        input type="checkbox" checked=true
+        input type="checkbox" checked="#{ params[:check] && params[:check][1] == '0' ? nil : 'checked' }"
         span.tt data-color="green" data-color-name="緑" 有安杏果
       label.checkbox.inline
-        input type="checkbox" checked=true
+        input type="checkbox" checked="#{ params[:check] && params[:check][2] == '0' ? nil : 'checked' }"
         span.tt data-color="yellow" data-color-name="黄" 玉井詩織
       label.checkbox.inline
-        input type="checkbox" checked=true
+        input type="checkbox" checked="#{ params[:check] && params[:check][3] == '0' ? nil : 'checked' }"
         span.tt data-color="pink" data-color-name="桃" 佐々木彩夏
       label.checkbox.inline
-        input type="checkbox" checked=true
+        input type="checkbox" checked="#{ params[:check] && params[:check][4] == '0' ? nil : 'checked' }"
         span.tt data-color="purple" data-color-name="紫" 高城れに
   div.control-group
     label.control-label 表示範囲 (X軸)

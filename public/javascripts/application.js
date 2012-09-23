@@ -62,12 +62,16 @@ $(function () {
     // get data from JSON API
     $.getJSON('/api/blog_comments', function (res) {
         $.each(res, function (key, value) {
-            chart.series[member[key]].setData($.map(value, function (e) {
+            var index = member[key];
+            chart.series[index].setData($.map(value, function (e) {
                 return {
                     x: e.created_at * 1000,
                     y: e.count
                 };
             }));
+            if ($('input[type="checkbox"]').eq(index).attr('checked') === undefined) {
+                chart.series[index].hide();
+            }
         });
         updateDateRange();
         updateValueRange();
@@ -87,6 +91,14 @@ $(function () {
                     'font-size': 'large'
                 }).text(name)
             ).html();
+        }
+    });
+    // check
+    $('input[type="checkbox"]').change(function () {
+        var index   = $(this).index('input[type="checkbox"]');
+        var checked = $(this).attr('checked') ? true : false;
+        if (checked ^ chart.series[index].visible) {
+            chart.series[index][checked ? 'show' : 'hide']();
         }
     });
     // x-axis (datepicker)
