@@ -59,6 +59,22 @@ $(function () {
     var updateValueRange = function () {
         chart.yAxis[0].setExtremes(0, Number($('#y-max').val()) || null);
     };
+    var updatePermalink = function () {
+        var params = {
+            from: $('#x-min').val(),
+            to  : $('#x-max').val()
+        };
+        var check = $('input[type="checkbox"]').map(function (i, e) {
+            return $(e).attr('checked') ? '1' : '0';
+        }).toArray().join('');
+        if (check !== '11111') {
+            params.check = check;
+        }
+        if ($('#y-max').val()) {
+            params.max = Number($('#y-max').val());
+        }
+        $('#permalink').val(location.origin + location.pathname + '?' + $.param(params));
+    };
     // get data from JSON API
     $.getJSON('/api/blog_comments', function (res) {
         $.each(res, function (key, value) {
@@ -75,6 +91,7 @@ $(function () {
         });
         updateDateRange();
         updateValueRange();
+        updatePermalink();
         initialized = true;
     });
 
@@ -99,6 +116,7 @@ $(function () {
         var checked = $(this).attr('checked') ? true : false;
         if (checked ^ chart.series[index].visible) {
             chart.series[index][checked ? 'show' : 'hide']();
+            updatePermalink();
         }
     });
     // x-axis (datepicker)
@@ -109,9 +127,15 @@ $(function () {
                 $(this).datepicker('hide').blur();
             }
             updateDateRange();
+            updatePermalink();
         });
     // y-axis
     $('#y-max').bind('input', function () {
         updateValueRange();
+        updatePermalink();
+    });
+    // permalink
+    $('#permalink').click(function () {
+        this.select();
     });
 });
