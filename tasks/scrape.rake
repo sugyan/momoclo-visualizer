@@ -15,7 +15,7 @@ task :scrape do
           entry.update(
             :member     => member,
             :title      => li.css('.newentrytitle').text,
-            :created_at => li.css('.updatetime').text.strip,
+            :created_at => DateTime.parse(li.css('.updatetime').text.strip).new_offset(Rational(9, 24)),
             :count      => li.css('.cotb').text.match(/\((\d+)\)/)[1],
           )
         end
