@@ -16,8 +16,8 @@ gem 'nokogiri', '>=1.5.5'
 gem 'json',     '>=1.7.5'
 gem 'dalli',    '>=2.2.1'
 
-# Test requirements
-gem 'rspec', :group => "test"
+# Test requirements (and for rake tasks)
+gem 'rspec'
 gem 'rack-test', :require => "rack/test"
 
 # Padrino Stable Gem
