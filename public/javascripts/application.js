@@ -102,8 +102,12 @@ $(function () {
                 return {
                     x: e.created_at * 1000,
                     y: e.count,
-                    url: e.url,
-                    title: e.title
+                    title: e.title,
+                    events: {
+                        click: function () {
+                            window.open(e.url);
+                        }
+                    }
                 };
             }));
             // hide or show ?
