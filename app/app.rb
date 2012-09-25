@@ -8,7 +8,13 @@ class Visualizer < Padrino::Application
   # cache
   register Padrino::Cache
   enable :caching
-  set :cache, Padrino::Cache::Store::Memcache.new(::Dalli::Client.new('127.0.0.1:11211', :exception_retry_limit => 1))
+  set :cache, Padrino::Cache::Store::Memcache.new(
+    ::Dalli::Client.new(
+      ENV['MEMCACHE_SERVERS'] || '127.0.0.1:11211',
+      :exception_retry_limit => 1,
+      :username => ENV['MEMCACHE_USERNAME'],
+      :password => ENV['MEMCACHE_USERNAME'],
+  ))
 
   ##
   # Application configuration options
