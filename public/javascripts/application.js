@@ -19,6 +19,7 @@ $(function () {
                     if (initialized) {
                         $('#x-min').val(moment(event.min).format('YYYY-MM-DD')).datepicker('update');
                         $('#x-max').val(moment(event.max).format('YYYY-MM-DD')).datepicker('update');
+                        updatePermalink();
                     }
                 }
             }
@@ -77,18 +78,30 @@ $(function () {
     };
     // get data from JSON API
     $.getJSON('/api/blog_comments', function (res) {
+        var max_datetime = 0;
         $.each(res, function (key, value) {
-            var index = member[key];
+            var index  = member[key];
+            var latest = value[value.length - 1];
+            // get latest date
+            if (latest.created_at > max_datetime) {
+                max_datetime = latest.created_at;
+            }
+            // set data
             chart.series[index].setData($.map(value, function (e) {
                 return {
                     x: e.created_at * 1000,
                     y: e.count
                 };
             }));
+            // hide or show ?
             if ($('input[type="checkbox"]').eq(index).attr('checked') === undefined) {
                 chart.series[index].hide();
             }
         });
+        // modify date range
+        if (max_datetime * 1000 < moment($('#x-max').val()).valueOf()) {
+            $('#x-max').val(moment(max_datetime * 1000).format('YYYY-MM-DD'));
+        }
         updateDateRange();
         updateValueRange();
         updatePermalink();
