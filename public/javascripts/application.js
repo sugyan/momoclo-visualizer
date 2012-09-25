@@ -1,3 +1,10 @@
+// Highcharts global options
+Highcharts.setOptions({
+    global: {
+        useUTC: false
+    }
+});
+
 $(function () {
     var initialized = false;
     var member = { momota: 0, ariyasu: 1, tamai: 2, sasaki: 3, takagi: 4 };
@@ -33,6 +40,10 @@ $(function () {
                     week: '%m月%d日'
                 }
             }
+        },
+        tooltip: {
+            xDateFormat: '%Y年%m月%d日 %H:%M:%S',
+            pointFormat: '{point.title}: <b>{point.y}</b>'
         },
         colors: [
             'red',
@@ -90,7 +101,9 @@ $(function () {
             chart.series[index].setData($.map(value, function (e) {
                 return {
                     x: e.created_at * 1000,
-                    y: e.count
+                    y: e.count,
+                    url: e.url,
+                    title: e.title
                 };
             }));
             // hide or show ?
