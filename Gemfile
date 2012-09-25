@@ -15,6 +15,7 @@ gem 'sequel',   '>=3.39.0'
 gem 'nokogiri', '>=1.5.5'
 gem 'json',     '>=1.7.5'
 gem 'dalli',    '>=2.2.1'
+gem 'tzinfo',   '>=0.3.33'
 
 # Test requirements (and for rake tasks)
 gem 'rspec'

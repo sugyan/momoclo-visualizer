@@ -6,4 +6,6 @@ Sequel::Model.db = case Padrino.env
   when :test        then Sequel.connect("postgres://localhost/momoclo_visualizer_test",        :loggers => [logger])
 end
 
-Sequel.default_timezone = :utc
+Sequel.extension :named_timezones
+Sequel.datetime_class = DateTime
+Sequel.default_timezone = 'Asia/Tokyo'
