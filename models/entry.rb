@@ -7,7 +7,7 @@ class Entry < Sequel::Model
         # create hash
         values = row.values
         # convert to epoch
-        values[:created_at] = values[:created_at].to_i
+        values[:created_at] = values[:created_at].to_time.to_i
         # push to each array
         member = values.delete(:member)
         ret[member] ||= []
