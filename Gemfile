@@ -9,9 +9,9 @@ gem 'rake', '>=0.9.2.2'
 gem 'sinatra-flash', :require => 'sinatra/flash'
 
 # Component requirements
-gem 'slim',     '>=1.3.1'
+gem 'slim',     '>=1.3.2'
 gem 'pg',       '>=0.14.1'
-gem 'sequel',   '>=3.39.0'
+gem 'sequel',   '>=3.40.0'
 gem 'nokogiri', '>=1.5.5'
 gem 'json',     '>=1.7.5'
 gem 'dalli',    '>=2.2.1'
