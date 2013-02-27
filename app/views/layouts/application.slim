@@ -5,12 +5,15 @@ html
     title #{ locals[:title] ? locals[:title] + ' | ' : '' }momoclo visualizer
     link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap-2.1.1.min.css"
     link rel="stylesheet" type="text/css" href="/stylesheets/style.css"
+    link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Megrim'
+    link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=chewey' 
+    
     - (locals[:csss] || []).each do |css|
       link rel="stylesheet" type="text/css" href==css
   body
     header
       div.navbar.navbar-fixed-top
-        div.navbar-inner
+        div.navbar-inner.navbar-pink
           div.container
             a.brand href="/" momoclo visualizer
     a href="https://github.com/sugyan/momoclo-visualizer"
