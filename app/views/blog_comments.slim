@@ -1,12 +1,12 @@
 - locals[:csss] = ['/bootstrap/css/datepicker.css']
 - locals[:jss] = ['/javascripts/lib/highstock-1.2.4.min.js', '/bootstrap/js/bootstrap-datepicker.js', '/javascripts/application.js']
-div.page-header
+div.well.subheader
   h2 blog comments
   p 各メンバーのブログへのコメント数の推移
 div#chart
-form.well.form-horizontal
+form.well.graph.form-horizontal
   div.control-group
-    label.control-label 表示/非表示
+    label.control-label 表示するメンバー
     div.controls
       label.checkbox.inline
         input type="checkbox" checked="#{ params[:check] && params[:check][0] == '0' ? nil : 'checked' }"
@@ -27,13 +27,13 @@ form.well.form-horizontal
     label.control-label 表示範囲 (X軸)
     div.controls
       input.datepicker.input-small#x-min type="text" value="#{ params[:from] || Date.today << 3 }"
-      |  - 
+      |  -
       input.datepicker.input-small#x-max type="text" value="#{ params[:to]   || Date.today + 0  }"
   div.control-group
     label.control-label 表示範囲 (Y軸)
     div.controls
       input.input-small type="text" value="0" disabled=true
-      |  - 
+      |  -
       input.input-small#y-max type="number" min="0" step="100" placeholder="auto" value="#{ params[:max] }"
   div.control-group
     label.control-label Permalink
