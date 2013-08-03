@@ -52,15 +52,30 @@ img.logo{
 }
 
 .well.mainVisual h1{
-	margin-bottom:20px;
-	font-size:58px;
-	color:white;
-	font-family: 'Megrim', cursive;
-	text-shadow: 0 1px 0 #666;
+  margin-bottom:20px;
+  font-size:58px;
+  color:white;
+  font-family: 'Megrim', cursive;
+  text-shadow: 0 1px 0 #666;
+}
+
+.well.subheader {
+  margin-top: 30px;
+  margin-bottom: 10px;
+  padding-top: 48px;
+  height: 89px;
+  background-image: url('/images/top.jpg');
+  color: #FFF;
+  text-align: center;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4), 0 0 30px rgba(0, 0, 0, 0.075);
+}
+
+.subheader h2 {
+  margin-bottom: 5px;
 }
 
 .well.graph{
-  margin-top: 30px;
+  margin-top: 10px;
   margin-bottom: 30px;
   height: 200px;
   color:white;
@@ -85,5 +100,5 @@ footer {
 
 /* blog comments */
 #chart {
-    margin: 10px 0;
+    margin: 0px;
 }
