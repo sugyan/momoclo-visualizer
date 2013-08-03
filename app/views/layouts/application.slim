@@ -6,8 +6,8 @@ html
     link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap-2.1.1.min.css"
     link rel="stylesheet" type="text/css" href="/stylesheets/style.css"
     link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Megrim'
-    link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=chewey' 
-    
+    link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=chewey'
+
     - (locals[:csss] || []).each do |css|
       link rel="stylesheet" type="text/css" href==css
   body
@@ -15,7 +15,8 @@ html
       div.navbar.navbar-fixed-top
         div.navbar-inner.navbar-pink
           div.container
-            a.brand href="/" momoclo visualizer
+            a.brand href="/"
+              img.logo src="/images/logo.png"
     a href="https://github.com/sugyan/momoclo-visualizer"
       img style="position: absolute; top: 40px; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"
     div.container
@@ -24,7 +25,7 @@ html
         a href="https://twitter.com/share" class="twitter-share-button" data-lang="ja" data-count="none" data-hashtags="momoclo_visualizer" ツイート
         script !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
         div.pull-right
-          | created by 
+          | created by
           a href="http://twitter.com/#!/sugyan" @sugyan
     script type="text/javascript" src="/javascripts/lib/moment-1.7.2.min.js"
     script type="text/javascript" src="/javascripts/lib/jquery-1.8.2.min.js"
