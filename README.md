@@ -16,4 +16,4 @@
 
 ## heroku ##
 
-    $ heroku addons:add memcache
+    $ heroku addons:add memcachier
