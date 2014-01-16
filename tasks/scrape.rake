@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 require 'logger'
 
 task :scrape do
@@ -16,7 +17,7 @@ task :scrape do
             :member     => member,
             :title      => li.css('.newentrytitle').text,
             :created_at => li.css('.updatetime').text.strip,
-            :count      => li.css('.cotb').text.match(/\((\d+)\)/)[1],
+            :count      => li.css('.newEntryUserAction').text.match(/コメント\((\d+)\)/)[1],
           )
         end
       rescue => err
